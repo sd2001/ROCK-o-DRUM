@@ -17,12 +17,12 @@ while True:
     draw(frame)                                #creating the rectangular drums
     kernel1=np.ones((4,4),np.uint8)             #kernels for smoothing the frames
     kernel2=np.ones((15,15),np.uint8)
-    lower_red=np.array([130,90,111])           #creating the mask for red color
-    upper_red=np.array([180,255,255])
+    lower_red=np.array([132,90,111])           #creating the mask for red color
+    upper_red=np.array([179,255,255])
     mask1=cv2.inRange(hsv, lower_red,upper_red)
     
-    lower_red=np.array([0,115,100])
-    upper_red= np.array([10,255,255])
+    lower_red=np.array([0,110,100])
+    upper_red= np.array([3,255,255])
     mask2=cv2.inRange(hsv, lower_red,upper_red)
     mask=mask1+mask2                           #final mask
     
