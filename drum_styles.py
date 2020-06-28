@@ -3,7 +3,7 @@ import pygame
 import time
 pygame.init()
 
-x1,y1= 10,10
+x1,y1= 10,10   #coordinates for the drums
 x2,y2=10,300
 x3,y3=465,10
 x4,y4=465,300
