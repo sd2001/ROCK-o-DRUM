@@ -30,15 +30,15 @@ while True:
     mask=cv2.morphologyEx(mask,cv2.MORPH_CLOSE,kernel2)
     x,y,w,h=0,0,0,0
     
-    contours,hierarchy=cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+    contours,hierarchy=cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)  #getting the contours in the mask
     try:
           for i in range (0,10):
                x,y,w,h=cv2.boundingRect(contours[i])
-               if(w*h)>2000:
+               if(w*h)>2000:                       #checking for a proper area to avoid noisy disturbances
                     break
 
     except:
-          pass
+          pass                                     #passes if no contours are there in the image
       
     cv2.rectangle(frame,(x,y),(x+w,y+h),(240, 128, 48),1)
     drum_press(frame,x,y,w,h)
