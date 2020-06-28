@@ -44,7 +44,7 @@ while True:
     
     
        
-    lower_b=np.array([38,86,0])
+    lower_b=np.array([38,86,0])                   #blue color range
     upper_b= np.array([121,255,255])
     mask_b=cv2.inRange(hsv, lower_b,upper_b)      #final mask
                               
