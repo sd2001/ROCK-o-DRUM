@@ -40,9 +40,9 @@ while True:
     except:
           pass                                     #passes if no contours are there in the image
       
-    cv2.rectangle(frame,(x,y),(x+w,y+h),(240, 128, 48),1)
-    drum_press(frame,x,y,w,h)
-    cv2.imshow('ROCK-o-DRUM',frame)
+    cv2.rectangle(frame,(x,y),(x+w,y+h),(240, 128, 48),2)   #drawing a rectangle around the red object
+    drum_press(frame,x,y,w,h)        #checking the drums it hits
+    cv2.imshow('ROCK-o-DRUM',frame)  #displaying the frames
     #cv2.imshow('MASK_red',mask)
     
     
