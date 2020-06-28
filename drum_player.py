@@ -31,6 +31,7 @@ while True:
     x,y,w,h=0,0,0,0
     
     contours,hierarchy=cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)  #getting the contours in the mask
+    
     try:
           for i in range (0,10):
                x,y,w,h=cv2.boundingRect(contours[i])
