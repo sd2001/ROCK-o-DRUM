@@ -1,9 +1,9 @@
-import cv2
+import cv2                             #importing modules
 import numpy as np
-from drum_styles import draw,drum_press
+from drum_styles import draw,drum_press 
 cap=cv2.VideoCapture(1)
 while True:
-    ret,frame=cap.read()
+    ret,frame=cap.read()               #
     frame=cv2.flip(frame,1)
     #frame=cv2.GaussianBlur(frame,(9,9),0)
     #gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
