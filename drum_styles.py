@@ -18,7 +18,7 @@ def draw(frame):
 def drum_press(frame,x,y,w1,h1):
     if x>x1 and y>y1 and x+w1<x1+w and y+h1<y1+h:               #checking which drum it collided with
         cv2.rectangle(frame,(x1,y1),(x1+w,y1+h),(0,255,0),-1)
-        pygame.mixer.Sound('crash_c.wav').play()
+        pygame.mixer.Sound('crash_c.wav').play()                #playing the .wav file
         time.sleep(0.08)
         pygame.mixer.Sound('crash_c.wav').stop()
             
