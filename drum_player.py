@@ -5,7 +5,7 @@ cap=cv2.VideoCapture(1)
 while True:
     ret,frame=cap.read()               #accessing the frames
     frame=cv2.flip(frame,1)
-    #frame=cv2.GaussianBlur(frame,(9,9),0)
+    frame=cv2.GaussianBlur(frame,(9,9),0)
     #gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     #_, binary = cv2.threshold(gray, 225, 255, cv2.THRESH_BINARY_INV)
     
@@ -17,32 +17,59 @@ while True:
     draw(frame)                                #creating the rectangular drums
     kernel1=np.ones((4,4),np.uint8)             #kernels for smoothing the frames
     kernel2=np.ones((15,15),np.uint8)
-    lower_red=np.array([132,90,111])           #creating the mask for red color
+    lower_red=np.array([132,90,120])           #creating the mask for red color
     upper_red=np.array([179,255,255])
     mask1=cv2.inRange(hsv, lower_red,upper_red)
     
     lower_red=np.array([0,110,100])
     upper_red= np.array([3,255,255])
     mask2=cv2.inRange(hsv, lower_red,upper_red)
-    mask=mask1+mask2                           #final mask
+    mask_r=mask1+mask2                           #final mask
     
-    mask=cv2.erode(mask,kernel1,iterations = 1)
-    mask=cv2.morphologyEx(mask,cv2.MORPH_CLOSE,kernel2)
-    x,y,w,h=0,0,0,0
+    mask_r=cv2.erode(mask_r,kernel1,iterations = 1)
+    mask_r=cv2.morphologyEx(mask_r,cv2.MORPH_CLOSE,kernel2)
+    xr,yr,wr,hr=0,0,0,0
     
-    contours,hierarchy=cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)  #getting the contours in the mask
+    contours_r,hierarchy=cv2.findContours(mask_r,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)  #getting the contours in the mask
     
-    try:
-          for i in range (0,10):
-               x,y,w,h=cv2.boundingRect(contours[i])
-               if(w*h)>2000:                       #checking for a proper area to avoid noisy disturbances
-                    break
+    
+    try:          
+      for i in range (0,10):
+            xr,yr,wr,hr=cv2.boundingRect(contours_r[i])
+            if(wr*hr)>2000:                       #checking for a proper area to avoid noisy disturbances
+                  break
 
     except:
           pass                                     #passes if no contours are there in the image
+    
+    
+       
+    lower_b=np.array([38,86,0])
+    upper_b= np.array([121,255,255])
+    mask_b=cv2.inRange(hsv, lower_b,upper_b)      #final mask
+                              
+    
+    mask_b=cv2.erode(mask_b,kernel1,iterations=1)
+    mask_b=cv2.morphologyEx(mask_b,cv2.MORPH_CLOSE,kernel2)
+    xb,yb,wb,hb=0,0,0,0
+    
+    contours_b,hierarchy=cv2.findContours(mask_b,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)  #getting the contours in the mask
+    
+    
+    try:          
+      for i in range (0,10):
+            xb,yb,wb,hb=cv2.boundingRect(contours_b[i])
+            if(wb*hb)>2000:                       #checking for a proper area to avoid noisy disturbances
+                  break
+
+    except:
+          pass              
       
-    cv2.rectangle(frame,(x,y),(x+w,y+h),(48, 128, 240),2)   #drawing a rectangle around the red object
-    drum_press(frame,x,y,w,h)        #checking the drums it hits
+    cv2.rectangle(frame,(xr,yr),(xr+wr,yr+hr),(255,255,255),2)   #drawing a rectangle around the red object
+    cv2.rectangle(frame,(xb,yb),(xb+wb,yb+hb),(255,255,255),2)
+    drum_press(frame,xr,yr,wr,hr)        #checking the drums it hits
+    drum_press(frame,xb,yb,wb,hb)
+    frame=cv2.resize(frame,(800,600))
     cv2.imshow('ROCK-o-DRUM',frame)  #displaying the frames
     #cv2.imshow('MASK_red',mask)
     

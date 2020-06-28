@@ -4,9 +4,9 @@ import time
 pygame.init()
 
 x1,y1= 10,10   #coordinates for the drums
-x2,y2=10,300
+x2,y2=100,300
 x3,y3=465,10
-x4,y4=465,300
+x4,y4=365,300
 w,h=160,160
 
 def draw(frame): 
