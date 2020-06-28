@@ -17,14 +17,14 @@ while True:
     draw(frame)                                #creating the rectangular drums
     kernel1=np.ones((4,4),np.uint8)             #kernels for smoothing the frames
     kernel2=np.ones((15,15),np.uint8)
-    lower_red=np.array([136,87,111])
+    lower_red=np.array([136,87,111])           #creating the mask for red color
     upper_red=np.array([179,255,255])
     mask1=cv2.inRange(hsv, lower_red,upper_red)
     
     lower_red=np.array([0,110,100])
     upper_red= np.array([3,255,255])
     mask2=cv2.inRange(hsv, lower_red,upper_red)
-    mask=mask1+mask2
+    mask=mask1+mask2                           #final mask
     
     mask=cv2.erode(mask,kernel1,iterations = 1)
     mask=cv2.morphologyEx(mask,cv2.MORPH_CLOSE,kernel2)
