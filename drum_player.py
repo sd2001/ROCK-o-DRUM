@@ -24,7 +24,7 @@ while True:
     lower_red=np.array([0,110,100])
     upper_red= np.array([3,255,255])
     mask2=cv2.inRange(hsv, lower_red,upper_red)
-    mask_r=mask1+mask2                           #final mask
+    mask_r=mask1+mask2                           #final red mask
     
     mask_r=cv2.erode(mask_r,kernel1,iterations = 1)
     mask_r=cv2.morphologyEx(mask_r,cv2.MORPH_CLOSE,kernel2)
@@ -46,19 +46,19 @@ while True:
        
     lower_b=np.array([38,86,0])                   #blue color range
     upper_b= np.array([121,255,255])
-    mask_b=cv2.inRange(hsv, lower_b,upper_b)      #final mask
+    mask_b=cv2.inRange(hsv, lower_b,upper_b)      #final blue mask
                               
     
     mask_b=cv2.erode(mask_b,kernel1,iterations=1)
     mask_b=cv2.morphologyEx(mask_b,cv2.MORPH_CLOSE,kernel2)
     xb,yb,wb,hb=0,0,0,0
     
-    contours_b,hierarchy=cv2.findContours(mask_b,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)  #getting the contours in the mask
+    contours_r,hierarchy=cv2.findContours(mask_b,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)  #getting the contours in the mask
     
     
     try:          
       for i in range (0,10):
-            xb,yb,wb,hb=cv2.boundingRect(contours_b[i])
+            xb,yb,wb,hb=cv2.boundingRect(contours_r[i])
             if(wb*hb)>2000:                       #checking for a proper area to avoid noisy disturbances
                   break
 
