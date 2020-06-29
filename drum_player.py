@@ -58,7 +58,7 @@ while True:
     
     try:          
       for i in range (0,10):
-            xb,yb,wb,hb=cv2.boundingRect(contours_r[i])
+            xb,yb,wb,hb=cv2.boundingRect(contours_r[i])  #getting the coordinates of the contour
             if(wb*hb)>2000:                       #checking for a proper area to avoid noisy disturbances
                   break
 
