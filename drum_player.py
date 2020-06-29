@@ -40,7 +40,7 @@ while True:
                   break
 
     except:
-          pass                                     #passes if no contours are there in the image
+          pass                                     #passes if no maks are there in the image
     
     
        
